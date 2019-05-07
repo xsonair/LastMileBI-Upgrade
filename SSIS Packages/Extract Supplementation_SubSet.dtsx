@@ -1,0 +1,1247 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="4/9/2015 12:43:12 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="AOLUSOLA-LT"
+  DTS:CreatorName="aolusola"
+  DTS:DTSID="{3A9BAFF6-46C7-4A13-96B4-9DCFF6D04E10}"
+  DTS:EnableConfig="True"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:ISOLevel="256"
+  DTS:LastModifiedProductVersion="15.0.0900.40"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Extract Supplementation_SubSet"
+  DTS:VersionBuild="295"
+  DTS:VersionGUID="{8DF53A6B-BCF0-4AFC-B9F6-1746F50E6D0D}"
+  DTS:VersionMajor="0">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DS_DW]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{938C2E99-FD46-425D-91F5-53AAEE571858}"
+      DTS:ObjectName="DS_DW">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=INPCD0525\SQLSERVER2016;Initial Catalog=DW;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-Refresh Stage-{938C2E99-FD46-425D-91F5-53AAEE571858}DS_DW;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DS_SRC_PIPELINE]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{BE3F4A42-FC01-4518-9A83-35B50AD28CDC}"
+      DTS:ObjectName="DS_SRC_PIPELINE">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=3P-ATL-DB-02.3pdelivery.com\VREPORTING01,3341;Initial Catalog=test_pipeline;Provider=SQLNCLI11;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-Refresh Stage-{BE3F4A42-FC01-4518-9A83-35B50AD28CDC}pipeline;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DS_SRC_REP]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{8452C382-C89E-4A1D-AB23-7E49706038E2}"
+      DTS:ObjectName="DS_SRC_REP">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=3P-ATL-DB-02.3pdelivery.com\VREPORTING01,3341;Initial Catalog=FC_MDT;Provider=SQLNCLI11;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-Refresh Stage-{8452C382-C89E-4A1D-AB23-7E49706038E2}DS_SRC_REP;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DS_SRC_XLM_REP]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{D2150E3C-807F-4D5A-852D-962DF1FD9CE3}"
+      DTS:ObjectName="DS_SRC_XLM_REP">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=3P-ATL-DB-02.3pdelivery.com\VREPORTING01,3341;Initial Catalog=XLM_DMS;Provider=SQLNCLI11;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-Refresh Stage-{8452C382-C89E-4A1D-AB23-7E49706038E2}DS_SRC_REP;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{832C3357-3B33-4141-8893-5D3EA8E3AD03}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="AnswerGiven_start">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{60A97BF8-EEDB-48A2-A8D0-9F0ACAAFDC42}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="AnswerGiven_stop">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{2E0CDC69-C6FD-41F8-8891-434D9BFE0FAD}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="AR_InvoiceHistoryHeader_3PI_start">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{75531079-2943-4C55-A39F-92184C9D5C7D}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="AR_InvoiceHistoryHeader_3PI_stop">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{09EF1BF5-430D-4F7D-BD5E-DF0E1F457B40}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="audittrklog_start">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{8EAC4737-5604-45D3-A540-3DE885192245}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="audittrklog_stop">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{A2FAADBA-1917-4017-ACEA-432BD842D262}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Claimant_start">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{06D07ADF-7C34-402E-8C6B-3893361ED00B}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Claimant_stop">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{698BDA71-4B65-4DF4-94F1-C2857D3C9E15}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ClaimItem_start">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{CD16F56D-857E-49DE-B6B9-E559D2B0D008}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ClaimItem_stop">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{81D5E5B6-3A93-4D5C-BC3D-7DFA1B2D6C34}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ClaimPayout_start">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{570B0E44-D301-4501-BA5D-F3D52A99B12C}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ClaimPayout_stop">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{BA7C9530-1ABA-4258-9D98-97AC57317B7A}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ClaimProfitCenter_start">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{27C2F7E8-A24B-4CC3-9413-398F5A1C7BB0}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ClaimProfitCenter_stop">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{BC42A7DD-B657-4D6D-B72F-CA088F691D5D}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ClaimStatusHistory_start">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{469A5D23-4D5A-44D7-A04D-635EEAC65900}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ClaimStatusHistory_stop">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{6BC2A81B-D232-4B23-9B8C-3137F4BB8C42}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Claim_start">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C680DBD6-BC1B-4DE2-8CA1-EA50BEEFC8E6}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Claim_stop">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C5C8CF28-D54E-457C-9BD4-AAD9A9654494}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="crdbinf_start">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{A878ED25-3F97-408D-A290-0E5CAA5254C2}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="crdbinf_stop">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{096B51B3-A97F-45E1-B8C5-4643714A4564}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="crimport_start">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{E37CC146-99A1-4418-A28F-DA4F697F5FEE}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="crimport_stop">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{8D7FF861-CCBE-46CC-8356-B4CC308D956D}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="crupdate_start">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{2F8F5CDC-C7D9-46F4-8448-2F120953D45C}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="crupdate_stop">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{DE183B2E-5B25-4155-9696-A5EF32ECC62E}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="externalsurveyresponses_start">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{36B7F054-4F35-4ED5-A011-EDBD3C22C69B}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="externalsurveyresponses_stop">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{57A6CCB2-C21F-4518-8066-78054A0CF933}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="fcdpfin_start">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{2E224FA4-1FB4-4770-90FF-06E2B46AE911}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="fcdpfin_stop">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{9CD1F60A-829F-416A-ACDE-4F312F4D6F38}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="fcdrpay_start">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{0DD9B599-BB1A-4BD9-AF90-916E3FC61E2C}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="fcdrpay_stop">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{AE2A31CA-1D1F-4B79-A169-34F8BA29E379}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="fclegs_start">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{015EF11B-FFE3-4389-BB92-A5732A29BBC4}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="fclegs_stop">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{1F343259-453E-4ED1-BC89-B93ED29ACCC4}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="fcshipto_QuesionnairesCompleted_start">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{DB226FCF-8E06-48D6-9D21-B30FD78FD8D1}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="fcshipto_QuesionnairesCompleted_stop">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{7019F900-4CC8-44FD-92CF-E8C75D526DC6}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="FLAG_SINGLE_BACKEND">
+      <DTS:VariableValue
+        DTS:DataType="11">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{13287E1B-C2BD-4BD2-A301-D8A3E77E06FC}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="GL_DetailPosting_3PI_start">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{4BC29E33-BFF0-408D-B93B-0B8D7EC8DC61}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="GL_DetailPosting_3PI_stop">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{DB3D9D22-9D9C-4624-A86B-50A3EE1DBEB6}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="images_start">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{5C1F7A45-3AA7-40EA-9EB8-11F6ADAC8A76}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="images_stop">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{CF2F61BE-00D6-4A27-96C8-11ED1595D9A6}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="legaldoc_start">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{D0FF52B7-BEB9-41AD-8544-FF3116F35F22}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="legaldoc_stop">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{2D382677-943B-4A7D-8527-8E581E0D2296}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="QuestionCompleted_start">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{75D039E7-A203-42BA-B589-D6DBA9F50094}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="QuestionCompleted_stop">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{B6D5EDAA-889D-4E26-80B7-7AE9AB27CF41}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="QuestionnaireCompleted_ResponseRequired_start">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{13071451-16B6-4751-956A-04610A133A7E}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="QuestionnaireCompleted_ResponseRequired_stop">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{99620C15-1802-468F-A108-4B86B0F58F30}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="QuestionnaireCompleted_start">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{A0FFB480-B2B0-4A09-9B4D-FBC2F4D61B4D}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="QuestionnaireCompleted_stop">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{27360B11-62AB-4272-86FA-19D354E6B591}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SectionCompleted_start">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{BCF3CCCD-1FBE-4FF0-B0FE-C2B988378FD0}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SectionCompleted_stop">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{DFD38542-90FB-4F44-A182-DCE9F3CE47FE}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ss_auto_survey_response_classification_start">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{8ABD1B00-E8EA-41D8-AE2C-ABEC2B4541BC}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ss_auto_survey_response_classification_stop">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{FE1D9672-7D07-4DC3-A095-5415381F58CA}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ss_auto_survey_response_required_start">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{504E09C9-33E8-4474-AED1-69824C04EF7B}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ss_auto_survey_response_required_stop">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{70F268FD-D600-461A-B934-05F4913B1459}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ss_auto_survey_response_start">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C401D03B-150C-4FB0-BCFF-4DC8326482BB}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ss_auto_survey_response_stop">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{672129F0-89D1-4C72-B281-C4B07BE7DD12}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="survans_start">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{4624BB26-4F0C-4EB4-B3B7-B5DC54D59133}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="survans_stop">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{D66BA846-980E-4C8A-B036-7CD03F8D2671}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="threepd_daily_operations_report_start">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{E4EDCD0A-95B3-477C-BC2C-E03FC2BD41D4}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="threepd_daily_operations_report_stop">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Load Supplementation"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{D9719658-9A7E-4FCA-AA68-B42E70A2547E}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load Supplementation"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server v10; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          version="1">
+          <components>
+            <component
+              refId="Package\Load Supplementation\datamart extract Supplementation"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              localeId="1033"
+              name="datamart extract Supplementation"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[extract].[Supplementation]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Supplementation\datamart extract Supplementation.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DS_DW]"
+                  connectionManagerRefId="Package.ConnectionManagers[DS_DW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load Supplementation\datamart extract Supplementation.Inputs[lineofbusiness_Output_datamart lineofbusiness]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="lineofbusiness_Output_datamart lineofbusiness">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Supplementation\datamart extract Supplementation.Inputs[lineofbusiness_Output_datamart lineofbusiness].Columns[MarketID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="MarketID"
+                      externalMetadataColumnId="Package\Load Supplementation\datamart extract Supplementation.Inputs[lineofbusiness_Output_datamart lineofbusiness].ExternalColumns[MarketId]"
+                      lineageId="Package\Load Supplementation\Supplementation.Outputs[Output].Columns[MarketID]" />
+                    <inputColumn
+                      refId="Package\Load Supplementation\datamart extract Supplementation.Inputs[lineofbusiness_Output_datamart lineofbusiness].Columns[MarketName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="40"
+                      cachedName="MarketName"
+                      externalMetadataColumnId="Package\Load Supplementation\datamart extract Supplementation.Inputs[lineofbusiness_Output_datamart lineofbusiness].ExternalColumns[MarketName]"
+                      lineageId="Package\Load Supplementation\Supplementation.Outputs[Output].Columns[MarketName]" />
+                    <inputColumn
+                      refId="Package\Load Supplementation\datamart extract Supplementation.Inputs[lineofbusiness_Output_datamart lineofbusiness].Columns[CarrierID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="12"
+                      cachedName="CarrierID"
+                      externalMetadataColumnId="Package\Load Supplementation\datamart extract Supplementation.Inputs[lineofbusiness_Output_datamart lineofbusiness].ExternalColumns[CarrierID]"
+                      lineageId="Package\Load Supplementation\Supplementation.Outputs[Output].Columns[CarrierID]" />
+                    <inputColumn
+                      refId="Package\Load Supplementation\datamart extract Supplementation.Inputs[lineofbusiness_Output_datamart lineofbusiness].Columns[BusinessName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="75"
+                      cachedName="BusinessName"
+                      externalMetadataColumnId="Package\Load Supplementation\datamart extract Supplementation.Inputs[lineofbusiness_Output_datamart lineofbusiness].ExternalColumns[BusinessName]"
+                      lineageId="Package\Load Supplementation\Supplementation.Outputs[Output].Columns[BusinessName]" />
+                    <inputColumn
+                      refId="Package\Load Supplementation\datamart extract Supplementation.Inputs[lineofbusiness_Output_datamart lineofbusiness].Columns[FromDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="FromDate"
+                      externalMetadataColumnId="Package\Load Supplementation\datamart extract Supplementation.Inputs[lineofbusiness_Output_datamart lineofbusiness].ExternalColumns[FromDate]"
+                      lineageId="Package\Load Supplementation\Supplementation.Outputs[Output].Columns[FromDate]" />
+                    <inputColumn
+                      refId="Package\Load Supplementation\datamart extract Supplementation.Inputs[lineofbusiness_Output_datamart lineofbusiness].Columns[ToDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ToDate"
+                      externalMetadataColumnId="Package\Load Supplementation\datamart extract Supplementation.Inputs[lineofbusiness_Output_datamart lineofbusiness].ExternalColumns[ToDate]"
+                      lineageId="Package\Load Supplementation\Supplementation.Outputs[Output].Columns[ToDate]" />
+                    <inputColumn
+                      refId="Package\Load Supplementation\datamart extract Supplementation.Inputs[lineofbusiness_Output_datamart lineofbusiness].Columns[NonStandardCosts]"
+                      cachedDataType="numeric"
+                      cachedName="NonStandardCosts"
+                      cachedPrecision="12"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Load Supplementation\datamart extract Supplementation.Inputs[lineofbusiness_Output_datamart lineofbusiness].ExternalColumns[NonStandardCosts]"
+                      lineageId="Package\Load Supplementation\Supplementation.Outputs[Output].Columns[NonStandardCosts]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Supplementation\datamart extract Supplementation.Inputs[lineofbusiness_Output_datamart lineofbusiness].ExternalColumns[Supl_Key]"
+                      dataType="i8"
+                      name="Supl_Key" />
+                    <externalMetadataColumn
+                      refId="Package\Load Supplementation\datamart extract Supplementation.Inputs[lineofbusiness_Output_datamart lineofbusiness].ExternalColumns[MarketId]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="MarketId" />
+                    <externalMetadataColumn
+                      refId="Package\Load Supplementation\datamart extract Supplementation.Inputs[lineofbusiness_Output_datamart lineofbusiness].ExternalColumns[MarketName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="40"
+                      name="MarketName" />
+                    <externalMetadataColumn
+                      refId="Package\Load Supplementation\datamart extract Supplementation.Inputs[lineofbusiness_Output_datamart lineofbusiness].ExternalColumns[CarrierID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="12"
+                      name="CarrierID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Supplementation\datamart extract Supplementation.Inputs[lineofbusiness_Output_datamart lineofbusiness].ExternalColumns[BusinessName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="75"
+                      name="BusinessName" />
+                    <externalMetadataColumn
+                      refId="Package\Load Supplementation\datamart extract Supplementation.Inputs[lineofbusiness_Output_datamart lineofbusiness].ExternalColumns[FromDate]"
+                      dataType="dbTimeStamp"
+                      name="FromDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load Supplementation\datamart extract Supplementation.Inputs[lineofbusiness_Output_datamart lineofbusiness].ExternalColumns[ToDate]"
+                      dataType="dbTimeStamp"
+                      name="ToDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load Supplementation\datamart extract Supplementation.Inputs[lineofbusiness_Output_datamart lineofbusiness].ExternalColumns[NonStandardCosts]"
+                      dataType="numeric"
+                      name="NonStandardCosts"
+                      precision="19"
+                      scale="4" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Supplementation\datamart extract Supplementation.Outputs[Error]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Error"
+                  synchronousInputId="Package\Load Supplementation\datamart extract Supplementation.Inputs[lineofbusiness_Output_datamart lineofbusiness]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Supplementation\datamart extract Supplementation.Outputs[Error].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Supplementation\datamart extract Supplementation.Outputs[Error].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Supplementation\datamart extract Supplementation.Outputs[Error].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Supplementation\datamart extract Supplementation.Outputs[Error].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Supplementation\Supplementation"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              localeId="1033"
+              name="Supplementation"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT  ct.ct_id AS MarketID,
+		ct.ct_desc AS MarketName,
+		dr.dr_id AS CarrierID,
+		dc.contbusname AS BusinessName,
+		CONVERT(Datetime, df.df_start, 120) AS FromDate,
+		CONVERT(Datetime, df.df_end, 120) AS ToDate,
+		CAST(SUM(CASE WHEN dp.dp_xac = 'ERN' AND COALESCE(jc.jc_over, 0) = 1 THEN dp.dp_amt
+		WHEN dp.dp_xac = 'ADV' AND dp.dp_comment NOT LIKE 'Total Weekly Pay%' THEN dp.dp_amt
+		ELSE 0 END) AS DECIMAL(12,2)) AS NonStandardCosts
+FROM	[FC_MDT].dbo.fcdpfin df WITH (NOLOCK) 
+		JOIN [FC_MDT].dbo.fcdrpay dp WITH (NOLOCK) ON df.df_payrun = dp.dp_payrun
+		JOIN [FC_MDT].dbo.fcdriver dr WITH (NOLOCK) ON dp.dp_dr_id = dr.dr_id
+		JOIN [FC_MDT].dbo.fccity ct WITH (NOLOCK) ON dr.dr_site = ct.ct_id
+		JOIN [FC_MDT].dbo.drcontracts dc WITH (NOLOCK) ON dr.dr_pkey = dc.dc_drpkey
+		LEFT JOIN 
+		(
+			SELECT	dp.dp_fh_id,
+					dp.dp_leg,
+					MAX(CAST(jc.jc_over AS INT)) AS jc_over
+			FROM	[FC_MDT].dbo.fcdrpay dp WITH (NOLOCK)
+					JOIN [FC_MDT].dbo.fcfgthd fh WITH (NOLOCK) ON dp.dp_fh_id = fh.fh_id
+					JOIN [FC_MDT].dbo.jobcosts jc WITH (NOLOCK) ON fh.fh_pkey = jc.jc_fhpkey AND dp.dp_leg = jc.jc_leg
+			GROUP BY dp.dp_fh_id, dp.dp_leg 
+		) jc ON dp.dp_fh_id = jc.dp_fh_id AND dp.dp_leg = jc.dp_leg
+
+WHERE	df.df_start between '09/01/2017' and '09/07/2017'
+--convert(date,DATEADD(DAY, -30, GETDATE())) and convert(date,GETDATE())
+GROUP BY dr.dr_id, dc.contbusname, ct.ct_id, ct.ct_desc,df.df_start, df.df_end
+/*
+UNION ALL
+
+SELECT	CTY.ct_id AS MarketID
+		,CTY.ct_desc AS MarketName
+		,DRV.dr_id AS CarrierID
+		,CTR.contbusname AS BusinessName	
+		,CONVERT(Datetime, STL.[FromDate], 120) AS FromDate
+		,CONVERT(Datetime, STL.[ToDate], 120) AS ToDate		
+		,STL.[NonStandardAmount] AS NonStandardCosts			
+FROM	[XLM_Finance].[Settlement].[Settlement] STL WITH (NOLOCK)
+			JOIN [XLM_FINANCE].Settlement.APReviewStatusType RTP WITH (NOLOCK)
+				ON RTP.APReviewStatusTypeID = STL.ReviewStatusTypeID
+			JOIN [FC_MDT].dbo.fccity CTY WITH (NOLOCK) 
+				ON CTY.ct_pkey = STL.ExternalMarketID
+			JOIN [FC_MDT].dbo.fcdriver DRV WITH (NOLOCK) 
+				ON DRV.dr_pkey = STL.ExternalServiceProviderID
+			JOIN [FC_MDT].dbo.drcontracts CTR WITH (NOLOCK) 
+				ON CTR.dc_drpkey = DRV.dr_pkey			
+WHERE STL.[IsImmediate] = 1 AND	RTP.Name IN ('Approved', 'approved', 'APPROVED')
+*/</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Supplementation\Supplementation.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DS_SRC_REP]"
+                  connectionManagerRefId="Package.ConnectionManagers[DS_SRC_REP]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Load Supplementation\Supplementation.Outputs[Output]"
+                  name="Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Supplementation\Supplementation.Outputs[Output].Columns[MarketID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Supplementation\Supplementation.Outputs[Output].ExternalColumns[MarketID]"
+                      length="10"
+                      lineageId="Package\Load Supplementation\Supplementation.Outputs[Output].Columns[MarketID]"
+                      name="MarketID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Supplementation\Supplementation.Outputs[Output].Columns[MarketName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Supplementation\Supplementation.Outputs[Output].ExternalColumns[MarketName]"
+                      length="40"
+                      lineageId="Package\Load Supplementation\Supplementation.Outputs[Output].Columns[MarketName]"
+                      name="MarketName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Supplementation\Supplementation.Outputs[Output].Columns[CarrierID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Supplementation\Supplementation.Outputs[Output].ExternalColumns[CarrierID]"
+                      length="12"
+                      lineageId="Package\Load Supplementation\Supplementation.Outputs[Output].Columns[CarrierID]"
+                      name="CarrierID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Supplementation\Supplementation.Outputs[Output].Columns[BusinessName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Supplementation\Supplementation.Outputs[Output].ExternalColumns[BusinessName]"
+                      length="75"
+                      lineageId="Package\Load Supplementation\Supplementation.Outputs[Output].Columns[BusinessName]"
+                      name="BusinessName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Supplementation\Supplementation.Outputs[Output].Columns[FromDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Supplementation\Supplementation.Outputs[Output].ExternalColumns[FromDate]"
+                      lineageId="Package\Load Supplementation\Supplementation.Outputs[Output].Columns[FromDate]"
+                      name="FromDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Supplementation\Supplementation.Outputs[Output].Columns[ToDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Supplementation\Supplementation.Outputs[Output].ExternalColumns[ToDate]"
+                      lineageId="Package\Load Supplementation\Supplementation.Outputs[Output].Columns[ToDate]"
+                      name="ToDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Supplementation\Supplementation.Outputs[Output].Columns[NonStandardCosts]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Supplementation\Supplementation.Outputs[Output].ExternalColumns[NonStandardCosts]"
+                      lineageId="Package\Load Supplementation\Supplementation.Outputs[Output].Columns[NonStandardCosts]"
+                      name="NonStandardCosts"
+                      precision="12"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Supplementation\Supplementation.Outputs[Output].ExternalColumns[MarketID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="MarketID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Supplementation\Supplementation.Outputs[Output].ExternalColumns[MarketName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="40"
+                      name="MarketName" />
+                    <externalMetadataColumn
+                      refId="Package\Load Supplementation\Supplementation.Outputs[Output].ExternalColumns[CarrierID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="12"
+                      name="CarrierID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Supplementation\Supplementation.Outputs[Output].ExternalColumns[BusinessName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="75"
+                      name="BusinessName" />
+                    <externalMetadataColumn
+                      refId="Package\Load Supplementation\Supplementation.Outputs[Output].ExternalColumns[FromDate]"
+                      dataType="dbTimeStamp"
+                      name="FromDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load Supplementation\Supplementation.Outputs[Output].ExternalColumns[ToDate]"
+                      dataType="dbTimeStamp"
+                      name="ToDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load Supplementation\Supplementation.Outputs[Output].ExternalColumns[NonStandardCosts]"
+                      dataType="numeric"
+                      name="NonStandardCosts"
+                      precision="12"
+                      scale="2" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Load Supplementation\Supplementation.Outputs[Error]"
+                  isErrorOut="true"
+                  name="Error">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Supplementation\Supplementation.Outputs[Error].Columns[MarketID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Load Supplementation\Supplementation.Outputs[Error].Columns[MarketID]"
+                      name="MarketID" />
+                    <outputColumn
+                      refId="Package\Load Supplementation\Supplementation.Outputs[Error].Columns[MarketName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="40"
+                      lineageId="Package\Load Supplementation\Supplementation.Outputs[Error].Columns[MarketName]"
+                      name="MarketName" />
+                    <outputColumn
+                      refId="Package\Load Supplementation\Supplementation.Outputs[Error].Columns[CarrierID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="12"
+                      lineageId="Package\Load Supplementation\Supplementation.Outputs[Error].Columns[CarrierID]"
+                      name="CarrierID" />
+                    <outputColumn
+                      refId="Package\Load Supplementation\Supplementation.Outputs[Error].Columns[BusinessName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="75"
+                      lineageId="Package\Load Supplementation\Supplementation.Outputs[Error].Columns[BusinessName]"
+                      name="BusinessName" />
+                    <outputColumn
+                      refId="Package\Load Supplementation\Supplementation.Outputs[Error].Columns[FromDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load Supplementation\Supplementation.Outputs[Error].Columns[FromDate]"
+                      name="FromDate" />
+                    <outputColumn
+                      refId="Package\Load Supplementation\Supplementation.Outputs[Error].Columns[ToDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load Supplementation\Supplementation.Outputs[Error].Columns[ToDate]"
+                      name="ToDate" />
+                    <outputColumn
+                      refId="Package\Load Supplementation\Supplementation.Outputs[Error].Columns[NonStandardCosts]"
+                      dataType="numeric"
+                      lineageId="Package\Load Supplementation\Supplementation.Outputs[Error].Columns[NonStandardCosts]"
+                      name="NonStandardCosts"
+                      precision="12"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Load Supplementation\Supplementation.Outputs[Error].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Supplementation\Supplementation.Outputs[Error].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Supplementation\Supplementation.Outputs[Error].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Supplementation\Supplementation.Outputs[Error].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Load Supplementation.Paths[lineofbusiness_Output_datamart lineofbusiness]"
+              endId="Package\Load Supplementation\datamart extract Supplementation.Inputs[lineofbusiness_Output_datamart lineofbusiness]"
+              name="lineofbusiness_Output_datamart lineofbusiness"
+              startId="Package\Load Supplementation\Supplementation.Outputs[Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate extract Supplementation"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{44C32303-9A97-46C4-B16B-9E102F4F5719}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate extract Supplementation"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{938C2E99-FD46-425D-91F5-53AAEE571858}"
+          SQLTask:SqlStatementSource="Truncate table extract.Supplementation" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{E7F1756E-5BFC-4072-9DF9-05D0555868B3}"
+      DTS:From="Package\Truncate extract Supplementation"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Load Supplementation" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="188,35"
+          Id="Package\Load Supplementation"
+          TopLeft="31.5,78.3679245283018" />
+        <NodeLayout
+          Size="240,35"
+          Id="Package\Truncate extract Supplementation"
+          TopLeft="5.5,5.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="125.72641509434,40.632075471698">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="-0.377358490566166,37.7358490566038"
+              Start="0,0"
+              End="-0.377358490566166,30.2358490566038">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.867924528302" />
+                  <mssgle:LineSegment
+                    End="-0.377358490566166,18.867924528302" />
+                  <mssgle:LineSegment
+                    End="-0.377358490566166,30.2358490566038" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
